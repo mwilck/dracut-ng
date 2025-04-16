@@ -400,3 +400,4 @@ fcde3355 fix(iscsi): make sure services are shut down when switching root
 d10455ad feat(lsinitrd.sh): print stored dracut cmdline
 541ae946 fix(dmsquash-live): use load_fstype to load driver for filesystems
 c6906fea fix(dmsquash-live): do not check ISO md5 if image filesystem
+59af2fff fix(crypt): install dm_crypt module in non-hostonly mode as well
