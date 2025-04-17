@@ -401,3 +401,5 @@ d10455ad feat(lsinitrd.sh): print stored dracut cmdline
 541ae946 fix(dmsquash-live): use load_fstype to load driver for filesystems
 c6906fea fix(dmsquash-live): do not check ISO md5 if image filesystem
 59af2fff fix(crypt): install dm_crypt module in non-hostonly mode as well
+dea50f64 fix(crypt): always install s390 crypto modules
+bb6d0c11 fix(dracut-init): assign real path to srcmods
