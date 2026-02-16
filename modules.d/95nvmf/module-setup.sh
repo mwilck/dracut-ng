@@ -77,6 +77,7 @@ installkernel() {
 cmdline() {
     local _hostnqn
     local _hostid
+    local -a _nbft_subsystems
 
     gen_nvmf_cmdline() {
         local _dev=$1
@@ -86,6 +87,7 @@ cmdline() {
         local trsvcid
         local _address
         local -a _address_parts
+        local nbft_entry
 
         [[ -L "/sys/dev/block/$_dev" ]] || return 0
         cd -P "/sys/dev/block/$_dev" || return 0
@@ -113,6 +115,18 @@ cmdline() {
                 [[ $i =~ ^trsvcid= ]] && trsvcid="${i#trsvcid=}"
             done
             [[ -z $traddr && -z $host_traddr && -z $trsvcid ]] && continue
+            # _nbft_subsystems is set in cmdline() scope below.
+            # It lists all subsystems found in the NBFT in the format
+            # "traddr,trsvcid"
+            # If the subsystem found is listed in the NBFT, don't add it
+            # explicitly to the command line.
+            if [[ $trtype == tcp ]]; then
+                for nbft_entry in "${_nbft_subsystems[@]}"; do
+                    if [[ "$traddr,$trsvcid" == "$nbft_entry" ]]; then
+                        continue 2
+                    fi
+                done
+            fi
             echo -n " rd.nvmf.discover=$trtype,$traddr,$host_traddr,$trsvcid"
         done
     }
@@ -127,6 +141,9 @@ cmdline() {
     fi
 
     [[ $hostonly ]] || [[ $mount_needs ]] && {
+        mapfile -t _nbft_subsystems < \
+            <(nvme nbft show -s -o json \
+                | jq -r '.[].subsystem[] | select(.transport == "tcp") | [.traddr, .trsvcid] | join(",")')
         pushd . > /dev/null
         for_each_host_dev_and_slaves gen_nvmf_cmdline
         popd > /dev/null || exit
