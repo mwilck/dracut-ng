@@ -1,5 +1,35 @@
 [Rendered view](https://github.com/dracut-ng/dracut-ng/blob/master/NEWS.md)
 
+dracut-ng-111
+=============
+
+#### Features
+
+* **nvmf:**
+  *  set rd.nvmf.nm=1 if NetworkManager 1.54 is detected ([d0f425d0](https://github.com/dracut-ng/dracut-ng/commit/d0f425d0bdae48deb666650bc449cefe86b76731))
+  *  allow using system interface naming policy ([1f8c8b60](https://github.com/dracut-ng/dracut-ng/commit/1f8c8b609bb0aa1890ab9eb93a703672d9febf19))
+  *  add dracut.conf option nvmf_nbft_mode ([24e0aa0d](https://github.com/dracut-ng/dracut-ng/commit/24e0aa0d75478d15fd476353e77ac6b7671fce02))
+  *  enable adapting to NBFT reconfiguration ([2b55cffd](https://github.com/dracut-ng/dracut-ng/commit/2b55cffd2155814094b121b490134676eb5ec04e))
+
+#### Bug Fixes
+
+* **dracut:**
+  *  remove udevrulesconfdir variable ([d867f00d](https://github.com/dracut-ng/dracut-ng/commit/d867f00d87b7ccc2738901a73f3d7bc20ed30989))
+  *  remove unused host_fs_all ([8ef39d08](https://github.com/dracut-ng/dracut-ng/commit/8ef39d0802daade93d7f578cfd6bb3bfc92a139c))
+* **dracut.conf.5:**  move fstab/chroot warning to hostonly_mode section ([2bf8586b](https://github.com/dracut-ng/dracut-ng/commit/2bf8586b2f7bef72673378db2b6b7448f750cc2e))
+* **kernel-modules-export:**  use return instead of exit in pre-pivot hook ([9c6fce6a](https://github.com/dracut-ng/dracut-ng/commit/9c6fce6a7190d90241e806c8f5646e57d0f46715))
+* **memdisk:**  use return instead of exit in cmdline hook ([ce9337e4](https://github.com/dracut-ng/dracut-ng/commit/ce9337e43e2b427f06162596d258ea37dce3064d))
+* **ppcmac:**  use return instead of exit in pre-udev hook ([5d81516b](https://github.com/dracut-ng/dracut-ng/commit/5d81516ba5591ed0d8b63905ccaafadc0745bb8f))
+* **syslog:**  use return instead of exit in initqueue/online hook ([ce808b75](https://github.com/dracut-ng/dracut-ng/commit/ce808b750a02b8a9d6495eb7fa504d3265226d04))
+* **systemd-networkd:**  check if units exist before enabling them ([eed94b22](https://github.com/dracut-ng/dracut-ng/commit/eed94b22ec59a3acebfa7df4ad1b7643a620aa75))
+
+#### Contributors
+
+- Benjamin Drung <benjamin.drung@canonical.com>
+- Martin Wilck <mwilck@suse.de>
+- Antonio Alvarez Feijoo <antonio.feijoo@suse.com>
+- Jo Zzsi <jozzsicsataban@gmail.com>
+
 dracut-ng-110
 =============
 
